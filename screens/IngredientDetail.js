@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
 
-const IngredientDetail = ({item}) => {
+const IngredientDetail = ({navigation, item}) => {
+
   const [itemName, setItemName] = useState(item.name);
   const [itemDate, setItemDate] = useState(item.date);
   const [itemQuantity, setItemQuantity] = useState(item.quantity);
