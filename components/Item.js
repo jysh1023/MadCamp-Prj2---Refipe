@@ -68,7 +68,7 @@ function Item ({item}) {
       <TouchableOpacity
         style={styles.container}
         activeOpacity={0.5}
-        onPress={({navigation, item}) => navigation.navigate('IngredientDetail', item)}>
+        onPress={({item}) => navigation.navigate('IngredientDetail')}>
         <Image
           source={imgPath}
           style={styles.iconContainer}
@@ -87,7 +87,7 @@ function Item ({item}) {
       <TouchableOpacity
         style={styles.container}
         activeOpacity={0.5}
-        onPress={({navigation, item}) => navigation.navigate('IngredientDetail', item)} >
+        onPress={({item}) => navigation.navigate('IngredientDetail')} >
         <Image
           source={imgPath}
           style={styles.iconContainer}
