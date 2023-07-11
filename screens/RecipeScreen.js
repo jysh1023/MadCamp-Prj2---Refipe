@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Button} from 'react-native';
 import axios from 'axios';
 
-const Recipe = () => {
+const Recipe = ({navigation}) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const Recipe = () => {
 
   return (
     <View style={styles.container} >
-
+      <Button title="내 냉장고에서 재료 고르기" onPress={() => navigation.navigate("SelectIngredient")} />
     </View>
   )
 }
