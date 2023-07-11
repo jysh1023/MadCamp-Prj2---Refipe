@@ -42,7 +42,7 @@ const AddItemDetails = ({navigation}) => {
         console.log(res.data);})
         .catch(err => console.error(err));
           alert("Add item successful");
-          
+
       } catch (error) {
         alert(error)
       }
@@ -129,10 +129,10 @@ const AddItemDetails = ({navigation}) => {
         </View>
 
         <View style={styles.buttonContainer}>
-          <Button style={styles.buttonStyle} title="취소" onPress={() => navigation.goBack()}/>
+          <Button style={styles.buttonStyle} title="취소" onPress={() => navigation.pop()}/>
           <Button style={styles.buttonStyle} title="확인" onPress={async () => {
             await handleSubmit();
-            navigation.goBack();
+            navigation.navigate('Main');
           }} />
         </View>
       </View>

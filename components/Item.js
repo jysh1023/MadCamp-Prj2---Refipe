@@ -9,8 +9,11 @@ import {
 } from 'react-native';
 import UrgentTag from './UrgentTag';
 import SafeTag from './SafeTag';
+import { useNavigation } from '@react-navigation/native';
 
 function Item ({item}) {
+
+  const navigation = useNavigation()
 
   const getDaysDifference = () => {
     setImagePath();
@@ -65,7 +68,7 @@ function Item ({item}) {
       <TouchableOpacity
         style={styles.container}
         activeOpacity={0.5}
-        onPress={() => navigation.navigate('IngredientDetail')} >
+        onPress={({navigation, item}) => navigation.navigate('IngredientDetail', item)}>
         <Image
           source={imgPath}
           style={styles.iconContainer}
@@ -84,7 +87,7 @@ function Item ({item}) {
       <TouchableOpacity
         style={styles.container}
         activeOpacity={0.5}
-        onPress={() => navigation.navigate('IngredientDetail')} >
+        onPress={({navigation, item}) => navigation.navigate('IngredientDetail', item)} >
         <Image
           source={imgPath}
           style={styles.iconContainer}

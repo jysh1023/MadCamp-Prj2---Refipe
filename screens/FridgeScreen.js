@@ -16,14 +16,13 @@ function Fridge({navigation}) {
     const getData = async () => {
       try {
         const response = await axios.get('http://10.0.2.2:3000/ingredients', {});
-        console.log(response.data);
         setData(response.data);
       } catch (error) {
         console.log(error);
       }
     };
     getData();
-  }, []);
+  });
 
   // 배열하는 코드, response.data 가 배열 형태이어야 sort 가능
   // useEffect(() => {
@@ -40,7 +39,7 @@ function Fridge({navigation}) {
   //   };
   //   getData();
   // }, []);
-  
+
 
   return (
     <View style={styles.container}>
