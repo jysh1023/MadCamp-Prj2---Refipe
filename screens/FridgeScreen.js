@@ -11,19 +11,11 @@ import axios from 'axios';
 
 function Fridge({navigation}) {
   const [data, setData] = useState([]);
-  // const [item, setItem] = useState({
-  //   name: '',
-  //   date: '',
-  //   quantity: 0,
-  //   category: '',
-  // });
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get('http://10.0.2.2:3000/ingredients', {  params: {
-          refrigerator: '64ad2112e7292dafc5789215'
-        }});
+        const response = await axios.get('http://10.0.2.2:3000/ingredients', {});
         console.log(response.data);
         setData(response.data);
       } catch (error) {
