@@ -28,33 +28,33 @@ function Item ({item}) {
 
   function setImagePath() {
     if (item.category == '과일') {
-      imgPath = require('../assets/category_icon/fruit.png')
+      imgPath = require('../assets/category_icon/과일.png')
     } else if (item.category == '채소') {
       imgPath = require('../assets/category_icon/채소.png')
     } else if (item.category == '쌀/잡곡') {
-      imgPath = require('../assets/category_icon/쌀:잡곡.png')
+      imgPath = require('../assets/category_icon/쌀_잡곡.png')
     } else if (item.category == '견과/건과') {
-      imgPath = require('../assets/category_icon/견과:건과.png')
+      imgPath = require('../assets/category_icon/견과_건과.png')
     } else if (item.category == '축산/계란') {
-      imgPath = require('../assets/category_icon/축산:계란.png')
+      imgPath = require('../assets/category_icon/축산_계란.png')
     } else if (item.category == '생수/음료') {
-      imgPath = require('../assets/category_icon/생수:음료.png')
+      imgPath = require('../assets/category_icon/생수_음료.png')
     } else if (item.category == '커피/원두/차') {
-      imgPath = require('../assets/category_icon/커피:원두:차.png')
+      imgPath = require('../assets/category_icon/커피_원두_차.png')
     } else if (item.category == '과자/초콜릿/시리얼') {
-      imgPath = require('../assets/category_icon/과자:초콜릿:시리얼.png')
+      imgPath = require('../assets/category_icon/과자_초콜릿_시리얼.png')
     } else if (item.category == '면/통조림/가공식품') {
-      imgPath = require('../assets/category_icon/면:통조림:가공식품.png')
+      imgPath = require('../assets/category_icon/면_통조림_가공식품.png')
     } else if (item.category == '찬/간편식/대용식') {
-      imgPath = require('../assets/category_icon/찬:간편식:대용식.png')
+      imgPath = require('../assets/category_icon/찬_간편식_대용식.png')
     } else if (item.category == '냉장/냉동/간편요리') {
-      imgPath = require('../assets/category_icon/냉장:냉동:간편요리.png')
+      imgPath = require('../assets/category_icon/냉장_냉동_간편요리.png')
     } else if (item.category == '유제품/아이스크림') {
-      imgPath = require('../assets/category_icon/유제품:아이스크림.png')
+      imgPath = require('../assets/category_icon/유제품_아이스크림.png')
     } else if (item.category == '가루/조미료/오일') {
-      imgPath = require('../assets/category_icon/가루:조미료:오일.png')
+      imgPath = require('../assets/category_icon/가루_조미료_오일.png')
     } else if (item.category == '장/소스/드레싱/식초') {
-      imgPath = require('../assets/category_icon/장:소스:드레싱:식초.png')
+      imgPath = require('../assets/category_icon/장_소스_드레싱_식초.png')
     } else {
       imgPath = require('../assets/temp_icon.png')
     }
