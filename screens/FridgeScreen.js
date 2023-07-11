@@ -25,6 +25,23 @@ function Fridge({navigation}) {
     getData();
   }, []);
 
+  // 배열하는 코드, response.data 가 배열 형태이어야 sort 가능
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     try {
+  //       const response = await axios.get('http://10.0.2.2:3000/ingredients', {});
+  //       console.log(response.data);
+
+  //       const sortedData = response.data.sort((a, b) => new Date(a.date) - new Date(b.date));
+  //       setData(sortedData);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getData();
+  // }, []);
+  
+
   return (
     <View style={styles.container}>
       <FlatList data={data} renderItem={({item}) => <Item item={item} />} />

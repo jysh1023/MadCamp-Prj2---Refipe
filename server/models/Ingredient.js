@@ -7,7 +7,7 @@ const IngredientSchema = new Schema({
     date: String,
     quantity: Number,
     // memo: String,
-    refrigerator: { type: Schema.Types.ObjectId, ref: 'Refrigerator' },
+    // refrigerator: { type: Schema.Types.ObjectId, ref: 'Refrigerator' },
     category: String
   });
 

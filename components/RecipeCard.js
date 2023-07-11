@@ -1,13 +1,13 @@
 import React from "react";
-import { StyleSheet, View, Image, Text } from "react-native";
+import { StyleSheet, View, Image, Text, Dimensions } from "react-native";
 
 
 const RecipeCard = ({item}) => {
   return (
     <View>
-      <Image source={require(item.path)} style={styles.imageStyle} />
+      {/* <Image source={require(item.path)} style={styles.imageStyle} />
       <Text style={styles.titleStyle}> {item.name} </Text>
-      <Text style={styles.subtitleStyle}> {item.ingredients}</Text>
+      <Text style={styles.subtitleStyle}> {item.ingredients}</Text> */}
     </View>
   )
 }
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     fontSize: 18,
-    fontWeight: bold,
+    fontWeight: 'bold',
   },
   subtitleStyle: {
     fontSize: 13

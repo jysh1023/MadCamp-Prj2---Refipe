@@ -11,11 +11,11 @@ function Recipe({navigation}) {
 
 
   // 지민님 부탁드립니다: 메뉴 정보 받아와서 setRecipes(response.data) <-- 이런식으로 넣어주기
-  useEffect(() => {
-    const getRecipe = async () => {
+  // useEffect(() => {
+  //   const getRecipe = async () => {
 
-    }
-  })
+  //   }
+  // })
 
   if (selectedData == 0) {
     return (

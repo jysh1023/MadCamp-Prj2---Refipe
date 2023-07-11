@@ -15,7 +15,6 @@ axios.post('http://localhost:3000/ingredients', {
   date: '2023-08-31',
   quantity: 1,
   // memo: '맛없어요',
-  refrigerator: '64ad2112e7292dafc5789215',
   category: '채소'
 }).then(res => {
     ingredientId = res.data._id;

@@ -12,13 +12,13 @@ const SelectIngredient = ({navigation}) =>  {
   const [data, setData] = useState([]);
 
   // 지민님 부탁드립니다: '메뉴 추천받기' 버튼을 누르면 selectedData에 있는 재료이름을 서버로 보내누세요~
-  const handleSubmit = async() => {
-    if (selectedData <= 0) {
-      Alert('재료를 1개 이상으로 선택해주세요')
-    } else {
+  // const handleSubmit = async() => {
+  //   if (selectedData <= 0) {
+  //     Alert('재료를 1개 이상으로 선택해주세요')
+  //   } else {
 
-    }
-  }
+  //   }
+  // }
 
   useEffect(() => {
     const getData = async () => {
@@ -42,7 +42,7 @@ const SelectIngredient = ({navigation}) =>  {
         title='메뉴 추천받기'
         style={styles.buttonStyle}
         onPress={() => {
-          handleSumit;
+          // handleSumit;
           navigation.goBack();}
         }/>
     </View>
