@@ -8,6 +8,8 @@ import MyPage from './screens/MyPageScreen';
 import AddItem from './screens/AddItemScreen.js';
 import AddItemDetails from './screens/AddItemDetails';
 import SelectIngredient from './screens/SelectIngredient';
+import IngredientDetail from './screens/IngredientDetail';
+import { Button } from '@react-native-material/core';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -50,6 +52,11 @@ const App = () => {
           name="SelectIngredient"
           component={SelectIngredient}
           options={{title: '식재료 고르기'}}
+        />
+        <Stack.Screen
+          name="IngredientDetail"
+          component={IngredientDetail}
+          options={{title: '식재료 상세정보'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
