@@ -32,8 +32,8 @@ const AddItemDetails = ({navigation}) => {
       return;
     } else {
       try{
+        console.log("들어왔다");
         await axios.post('http://10.0.2.2:3000/ingredients',{
-        _id : new mongoose.Types.ObjectId(),
         name : itemName,
         date : itemDate,
         quantity : itemQuantity,
@@ -41,7 +41,7 @@ const AddItemDetails = ({navigation}) => {
       }).then(res => {
         console.log(res.data);})
         .catch(err => console.error(err));
-          // alert("Add item successful");
+          alert("Add item successful");
           
       } catch (error) {
         alert(error)
@@ -130,7 +130,10 @@ const AddItemDetails = ({navigation}) => {
 
         <View style={styles.buttonContainer}>
           <Button style={styles.buttonStyle} title="취소" onPress={() => navigation.goBack()}/>
-          <Button style={styles.buttonStyle} title="확인" onPress={handleSubmit} />
+          <Button style={styles.buttonStyle} title="확인" onPress={async () => {
+            await handleSubmit();
+            navigation.goBack();
+          }} />
         </View>
       </View>
     // </KeyboardAwareScrollView>
