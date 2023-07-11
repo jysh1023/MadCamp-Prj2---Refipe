@@ -16,7 +16,8 @@ function Fridge({navigation}) {
     const getData = async () => {
       try {
         const response = await axios.get('http://172.10.5.72:80/ingredients', {});
-        setData(response.data);
+        sortedData = response.data.sort((a, b) => new Date(a.date) - new Date(b.date));
+        setData(sortedData);
       } catch (error) {
         console.log(error);
       }
