@@ -32,12 +32,17 @@ const AddItemDetails = ({navigation}) => {
       return;
     } else {
       try{
-        await axios.post('http://10.0.2.2:3000/api/create',
-        {itemName, itemDate, itemQuantity, itemCategory})
-          .then(res => {console.log(res.data);})
-          .catch(err => console.error(err));
+        await axios.post('http://10.0.2.2:3000/ingredients',{
+        _id : new mongoose.Types.ObjectId(),
+        name : itemName,
+        date : itemDate,
+        quantity : itemQuantity,
+        category : itemCategory
+      }).then(res => {
+        console.log(res.data);})
+        .catch(err => console.error(err));
           // alert("Add item successful");
-
+          
       } catch (error) {
         alert(error)
       }
