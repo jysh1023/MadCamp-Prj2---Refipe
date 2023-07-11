@@ -15,7 +15,7 @@ function Fridge({navigation}) {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get('http://10.0.2.2:3000/ingredients', {});
+        const response = await axios.get('http://172.10.5.72:80/ingredients', {});
         setData(response.data);
       } catch (error) {
         console.log(error);

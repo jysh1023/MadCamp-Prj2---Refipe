@@ -33,7 +33,7 @@ const AddItemDetails = ({navigation}) => {
     } else {
       try{
         console.log("들어왔다");
-        await axios.post('http://10.0.2.2:3000/ingredients',{
+        await axios.post('http://172.10.5.72:80/ingredients',{
         name : itemName,
         date : itemDate,
         quantity : itemQuantity,
