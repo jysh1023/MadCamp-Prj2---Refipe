@@ -1,40 +1,50 @@
 import React from "react";
-import { StyleSheet, View, Image, Text, Dimensions } from "react-native";
+import { ImageBackground, StyleSheet, View, Image, Text, Dimensions, TouchableOpacity, Linking} from "react-native";
 
-
-const RecipeCard = ({item}) => {
+const itemCard = ({ item }) => {
   return (
-    <View>
-      {/* <Image source={require(item.path)} style={styles.imageStyle} />
-      <Text style={styles.titleStyle}> {item.name} </Text>
-      <Text style={styles.subtitleStyle}> {item.ingredients}</Text> */}
-    </View>
-  )
-}
+    <TouchableOpacity style={styles.container} onPress={() => Linking.openURL(item.url)}>
+      <View style={styles.imageContainer}>
+        <Image source={{ uri: `http://172.10.5.72${decodeURIComponent(item.imagepath)}` }} style={styles.imageStyle} />
+      </View>
+      <Text style={styles.titleStyle}>{item.title}</Text>
+      <Text style={styles.subtitleStyle}>{item.keyword}</Text>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    height: Dimensions.get('window').width * 0.7,
-    width: Dimensions.get('window').width * 0.9,
-    backgroundColor: '#fff',
-    borderColor: '#ccc',
-    borderWidth: 2,
-    borderRadius: 10,
-    flexDirection: 'column',
-    alignItems: 'center',
+    width: '95%',
+    height: 200,
     marginBottom: 10,
+    elevation: 2,
+    alignContent: 'center',
+    margin:7,
+    padding: 10,
+    backgroundColor: '#fff',
+    borderRadius: 10
+  },
+  imageContainer: {
+    flex: 1,
+    borderRadius: 8,
+    overflow: 'hidden',
   },
   imageStyle: {
-    width: 100,
+    flex: 1,
+    resizeMode: 'cover',
   },
   titleStyle: {
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: 'bold',
+    marginTop: 10,
+    marginHorizontal: 10
   },
   subtitleStyle: {
-    fontSize: 13
-  }
+    fontSize: 14,
+    color: 'gray',
+    marginHorizontal: 10
+  },
+});
 
-})
-
-export default RecipeCard;
+export default itemCard;

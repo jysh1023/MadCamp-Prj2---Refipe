@@ -9,6 +9,7 @@ import AddItem from './screens/AddItemScreen.js';
 import AddItemDetails from './screens/AddItemDetails';
 import SelectIngredient from './screens/SelectIngredient';
 import IngredientDetail from './screens/IngredientDetail';
+import RecipeDataScreen from './screens/RecipeDataScreen';
 import { View, Image } from 'react-native';
 
 const Tab = createBottomTabNavigator();
@@ -68,8 +69,6 @@ function Home() {
             );}
           }}
         />
-      {/* <Tab.Screen name="레시피북" component={Recipe} />
-      <Tab.Screen name="마이페이지" component={MyPage} /> */}
     </Tab.Navigator>
   );
 }
@@ -107,6 +106,11 @@ const App = () => {
           name="IngredientDetail"
           component={IngredientDetail}
           options={{title: '식재료 상세정보'}}
+        />
+        <Stack.Screen
+          name="RecipeDataScreen"
+          component={RecipeDataScreen}
+          options={{title: '레시피 추천 결과'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

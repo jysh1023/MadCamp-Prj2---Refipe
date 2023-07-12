@@ -8,45 +8,20 @@ import { FlatList, GestureHandlerRootView} from 'react-native-gesture-handler';
 
 function Recipe({navigation}) {
 
-  const [recipes, setRecipes] = useState([])
-
-
-  // 지민님 부탁드립니다: 메뉴 정보 받아와서 setRecipes(response.data) <-- 이런식으로 넣어주기
-  // useEffect(() => {
-  //   const getRecipe = async () => {
-
-  //   }
-  // })
-
-  if (recipes.length == 0) {
-    return (
-      <View style={styles.container} >
-        <Image source={require('../assets/background2.jpg')} style={{flex: 1, opacity: 0.4, width: 600}} />
-        <View style={{flexDirection:'column', alignItems:'center', justifyContent:'center', position:'absolute'}}>
-          <Text style={{fontSize:19, fontWeight: 'bold', color:'#000'}}>유통기한이 임박한 재료로 요리를 해보아요!</Text>
-          <TouchableOpacity
-            style={styles.filledButton}
-            activeOpacity={0.9}
-            onPress={() => navigation.navigate('SelectIngredient')}>
-            <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>내 냉장고에서 재료 고르기 </Text>
-          </TouchableOpacity>
-        </View>
-
-      </View>
-    )
-  } else {
-    return(
-      <View style={styles.container} >
-        <FlatList data={recipes} renderItem={({item})=> <RecipeCard item={item}/>} />
+  return (
+    <View style={styles.container} >
+      <Image source={require('../assets/background2.jpg')} style={{flex: 1, opacity: 0.4, width: 600}} />
+      <View style={{flexDirection:'column', alignItems:'center', justifyContent:'center', position:'absolute'}}>
+        <Text style={{fontSize:19, fontWeight: 'bold', color:'#000'}}>유통기한이 임박한 재료로 요리를 해보아요!</Text>
         <TouchableOpacity
           style={styles.filledButton}
           activeOpacity={0.9}
-          onPress={async() => navigation.pop()}>
-          <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>재료 다시 담기 </Text>
+          onPress={() => navigation.navigate('SelectIngredient')}>
+          <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>내 냉장고에서 재료 고르기 </Text>
         </TouchableOpacity>
       </View>
-    )
-  }
+    </View>
+  )
 
 }
 

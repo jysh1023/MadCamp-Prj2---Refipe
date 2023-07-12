@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
-import { StyleSheet, View, FlatList, Dimensions, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, View, FlatList, TouchableOpacity, Text } from "react-native";
 import axios from 'axios';
 import ItemSelectable from "../components/Item_selectable";
 import selectedData from "../context/SelectedData";
-import { Button } from "@react-native-material/core";
+import recipeData from "../context/RecipeData";
 
 const AppContext = React.createContext()
 
@@ -11,20 +11,23 @@ const SelectIngredient = ({navigation}) =>  {
 
   const [data, setData] = useState([]);
 
-  // 지민님 부탁드립니다: '메뉴 추천받기' 버튼을 누르면 selectedData에 있는 재료이름을 서버로 보내누세요~
+
   const handleSubmit = async () => {
     if (selectedData.length <= 0) {
         alert('재료를 1개 이상으로 선택해주세요');
     } else {
-        const keyword = selectedData;
-        console.log(selectedData)
-        
+        const keyword = selectedData.join(", ");
+
         try {
             const res = await axios.post('http://172.10.5.72:80/keywords', { keywords: keyword });
             if (res.data.message === 'Crawling Done') {
                 console.log('Crawling and DB insertion successful.');
                 const recipesRes = await axios.get(`http://172.10.5.72:80/recipes/${keyword}`);
                 console.log(recipesRes.data);
+                recipeData.push(recipesRes.data);
+                console.log(recipeData);
+                navigation.pop();
+                navigation.navigate('RecipeDataScreen', data)
             } else {
                 console.error('Crawling and DB insertion failed.');
             }
