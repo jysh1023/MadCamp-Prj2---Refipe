@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 function Item ({item}) {
 
   const navigation = useNavigation()
+  const [currentItem, setCurrentItem] = useState(item)
 
   const getDaysDifference = () => {
     setImagePath();
@@ -68,7 +69,7 @@ function Item ({item}) {
       <TouchableOpacity
         style={styles.container}
         activeOpacity={0.5}
-        onPress={({item}) => navigation.navigate('IngredientDetail')}>
+        onPress={() => navigation.navigate('IngredientDetail', currentItem)}>
         <Image
           source={imgPath}
           style={styles.iconContainer}
@@ -87,7 +88,7 @@ function Item ({item}) {
       <TouchableOpacity
         style={styles.container}
         activeOpacity={0.5}
-        onPress={({item}) => navigation.navigate('IngredientDetail')} >
+        onPress={() => navigation.navigate('IngredientDetail', currentItem)} >
         <Image
           source={imgPath}
           style={styles.iconContainer}
@@ -106,21 +107,18 @@ function Item ({item}) {
 
 const styles = StyleSheet.create({
   container: {
-    height: 70,
+    height: 80,
     width: Dimensions.get('window').width * 0.9,
     backgroundColor: '#fff',
-    borderColor: '#ccc',
-    borderWidth: 2,
     borderRadius: 10,
+    elevation: 2,
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    margin: 7,
   },
   iconContainer: {
-    backgroundColor: '#36c1b9',
-    borderRadius: 100,
-    height: 46,
-    width: 46,
+    height: 50,
+    width: 50,
     margin: 10,
   },
   textContainer: {
@@ -128,15 +126,12 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   nameText: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: 'bold',
     marginBottom: 5,
   },
   dateText: {
-    fontSize: 11,
-  },
-  selectedContainer: {
-
+    fontSize: 13,
   }
 });
 

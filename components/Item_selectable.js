@@ -121,21 +121,18 @@ const ItemSelectable = ({item}) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 70,
+    height: 80,
     width: Dimensions.get('window').width * 0.9,
-    backgroundColor: '#fff',
-    borderColor: '#ccc',
-    borderWidth: 2,
+    backgroundColor: '#eee',
     borderRadius: 10,
+    elevation: 2,
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    margin: 7,
   },
   iconContainer: {
-    backgroundColor: '#36c1b9',
-    borderRadius: 100,
-    height: 46,
-    width: 46,
+    height: 50,
+    width: 50,
     margin: 10,
   },
   textContainer: {
@@ -143,23 +140,22 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   nameText: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: 'bold',
     marginBottom: 5,
   },
   dateText: {
-    fontSize: 11,
+    fontSize: 13,
   },
   selectedContainer: {
-    height: 70,
-    width: Dimensions.get('window').width * 0.9,
-    backgroundColor: '#36c1b9',
-    borderColor: '#ccc',
-    borderWidth: 2,
+    height: 80,
+    width: '90%',
+    backgroundColor: '#fff',
     borderRadius: 10,
+    elevation: 5,
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    margin: 10,
   }
 });
 

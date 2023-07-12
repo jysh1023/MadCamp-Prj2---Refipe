@@ -1,84 +1,134 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Button, TextInput, Dimensions} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Modal, TouchableOpacity, Alert} from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import axios from "axios";
+
+ function IngredientDetail (){
+
+  const navigation = useNavigation();
+  const route = useRoute();
+
+  const [itemName, setItemName] = useState(route.params.name);
+  const [itemDate, setItemDate] = useState(route.params.date);
+  const [itemQuantity, setItemQuantity] = useState(route.params.quantity);
+  const [itemCategory, setItemCategory] = useState(route.params.category);
+  const [change, setChange] = useState(false);
 
 
- function IngredientDetail ({navigation}, input){
-
-  const [itemName, setItemName] = useState(input.name);
-  const [itemDate, setItemDate] = useState(input.date);
-  const [itemQuantity, setItemQuantity] = useState(input.quantity);
-  const [itemCategory, setItemCategory] = useState(input.category);
-
-  // 지민님 부탁드립니다: 현재 item을 db에서 삭제해주세요
-  const handleDelete = async () => {
-
+  const handleEdit = async () => {
+    try{
+      console.log(route.params._id);
+      await axios.put(`http://172.10.5.72:80/ingredients/${route.params._id}`, {
+        name : itemName,
+        date : itemDate,
+        quantity : itemQuantity,
+        category : itemCategory
+      }).then(res => {console.log(res.data);})
+        .catch(err => console.error(err));
+          Alert("Edit item successful");
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  // 지민님 부탁드립니다: 현재 item의 수정사항을 db에 저장해주세여
-  // 각 필드의 최신 값은 item~ 에 저장되어 있습니다
-  const handleEdit = async () => {
-
+  const handleDelete = async() => {
+    try{
+      console.log(route.params._id);
+      await axios.delete(`http://172.10.5.72:80/ingredients/${route.params._id}`)
+        .then(res => {console.log(res.data);})
+        .catch(err => console.error(err));
+          Alert("Delete item successful");
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
     <View style={styles.container}>
+
       <View style={{marginHorizontal: 24}}>
-        <Text style={{fontSize: 15, color: '#333'}}>식재료</Text>
+        <Text style={styles.titleText}>식재료</Text>
         <TextInput
           style={styles.itemInput}
           defaultValue={itemName}
-          onChangeText={text => setItemName(text)}
+          onChangeText={text => {
+            setItemName(text)
+            if (text != route.params.name) setChange(true)
+            else setChange(false)
+          }}
           autoComplete="off"
         />
       </View>
 
       <View style={{marginHorizontal: 24}}>
-        <Text style={{fontSize: 15, color: '#333'}}>유통기한</Text>
+        <Text style={styles.titleText}>유통기한</Text>
         <TextInput
           style={styles.itemInput}
           defaultValue={itemDate}
-          onChangeText={text => setItemDate(text)}
+          onChangeText={text => {
+            setItemDate(text)
+            if (text != route.params.date) setChange(true)
+            else setChange(false)
+          }}
           autoComplete="off"
           keyboardType="numeric"
         />
       </View>
 
       <View style={{marginHorizontal: 24}}>
-        <Text style={{fontSize: 15, color: '#333'}}>개수</Text>
+        <Text style={styles.titleText}>개수</Text>
         <TextInput
           style={styles.itemInput}
-          defaultValue={itemQuantity}
-          onChangeText={text => setItemQuantity(Number(text))}
+          defaultValue={itemQuantity.toString()}
+          onChangeText={text => {
+            setItemQuantity(Number(text))
+            if (text != route.params.quantity) setChange(true)
+            else setChange(false)
+          }}
           autoComplete="off"
           keyboardType="numeric"
         />
       </View>
 
       <View style={{marginHorizontal: 24}}>
-        <Text style={{fontSize: 15, color: '#333'}}>분류</Text>
+        <Text style={styles.titleText}>분류</Text>
         <TextInput
           style={styles.itemInput}
           defaultValue={itemCategory}
-          onChangeText={text => setItemCategory(text)}
+          onChangeText={text => {
+            setItemCategory(text)
+            if (text != route.params.category) setChange(true)
+            else setChange(false)
+          }}
           autoComplete="off"
         />
       </View>
 
       <View style={styles.buttonContainer}>
-        <Button
-          style={styles.buttonStyle}
-          title="다 먹음"
+        <TouchableOpacity
+          style={styles.filledButton}
+          activeOpacity={0.5}
           onPress={() => {
             handleDelete;
-            navigation.goBack();
-          }}/>
-        <Button
-          style={styles.buttonStyle}
-          title="수정"
-          onPress={() => {
-            handleEdit;
             navigation.pop();
-          }}/>
+          }}>
+            <Text style={{color: '#FFFFFF', fontSize: 15, fontWeight: 'bold'}}>다 먹음</Text>
+          </TouchableOpacity>
+        <TouchableOpacity
+          style={change === false? styles.outlinedButton : styles.filledButton}
+          activeOpacity={0.5}
+          onPress={async() => {
+            if (change == false) Alert('수정 사항이 없습니다!')
+            else {
+              await handleEdit();
+              navigation.pop();
+            }
+          }}>
+            <Text style={change === false
+              ? {color: '#46B2B2', fontSize: 15, fontWeight: 'bold'}
+              : {color: '#FFFFFF', fontSize: 15, fontWeight: 'bold'}}>
+            수정</Text>
+          </TouchableOpacity>
       </View>
     </View>
 
@@ -93,15 +143,39 @@ const styles = StyleSheet.create({
   itemInput: {
     borderBottomWidth: 0.5,
     height: 48,
+
     borderBottomColor: '#8e93a1',
     marginBottom: 30,
   },
   buttonContainer: {
-    width: Dimensions.get('window').width * 0.90,
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row'
   },
-  buttonStyle: {
+  filledButton: {
+    height: 35,
+    width: 170,
+    justifyContent: 'center',
+    alignItems:'center',
+    backgroundColor: '#46B2B2',
+    borderRadius: 20,
     margin: 10,
   },
+  outlinedButton: {
+    height: 35,
+    width: 170,
+    justifyContent: 'center',
+    alignItems:'center',
+    backgroundColor: '#fff',
+    borderColor: '#46B2B2',
+    borderWidth: 1,
+    borderRadius: 20,
+    margin: 10,
+  },
+  titleText: {
+    fontSize: 15,
+    color: '#333'
+  }
 });
 
 export default IngredientDetail;
