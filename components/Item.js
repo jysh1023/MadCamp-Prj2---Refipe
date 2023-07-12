@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -13,8 +13,8 @@ import { useNavigation } from '@react-navigation/native';
 
 function Item ({item}) {
 
-  const navigation = useNavigation()
-  const [currentItem, setCurrentItem] = useState(item)
+  const navigation = useNavigation();
+  const currentItem = item;
 
   const getDaysDifference = () => {
     setImagePath();
@@ -29,6 +29,7 @@ function Item ({item}) {
 
     return differenceDays;
   };
+
 
   function setImagePath() {
     if (item.category == '과일') {

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { StyleSheet, View, FlatList, Dimensions } from "react-native";
+import { StyleSheet, View, FlatList, Dimensions, TouchableOpacity, Text } from "react-native";
 import axios from 'axios';
 import ItemSelectable from "../components/Item_selectable";
 import selectedData from "../context/SelectedData";
@@ -38,7 +38,8 @@ const SelectIngredient = ({navigation}) =>  {
       try {
         const response = await axios.get('http://172.10.5.72:80/ingredients', {});
         console.log(response.data);
-        setData(response.data);
+        sortedData = response.data.sort((a, b) => new Date(a.date) - new Date(b.date));
+        setData(sortedData);
       } catch (error) {
         console.log(error);
       }
@@ -51,13 +52,11 @@ const SelectIngredient = ({navigation}) =>  {
       <FlatList
         data={data}
         renderItem={({item}) => <ItemSelectable item={item}/>} />
-      <Button
-        title='메뉴 추천받기'
-        style={styles.buttonStyle}
-        onPress={() => {
-          handleSubmit()
-          navigation.goBack();}
-        }/>
+      <TouchableOpacity
+        style={styles.filledButton}
+        onPress={() => navigation.goBack()}>
+        <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}> 레시피 추천받기 </Text>
+      </TouchableOpacity>
     </View>
   )
 
@@ -69,9 +68,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
   },
-  buttonStyle: {
-    width: Dimensions.get('window').width * 0.9
-  }
+  filledButton: {
+    position:'absolute',
+    bottom: 15,
+    height: 40,
+    width: '70%',
+    justifyContent: 'center',
+    alignItems:'center',
+    elevation: 2,
+    backgroundColor: '#46B2B2',
+    borderRadius: 20,
+    margin: 10,
+  },
 })
 
 export default SelectIngredient;

@@ -9,7 +9,6 @@ import AddItem from './screens/AddItemScreen.js';
 import AddItemDetails from './screens/AddItemDetails';
 import SelectIngredient from './screens/SelectIngredient';
 import IngredientDetail from './screens/IngredientDetail';
-import { Button } from '@react-native-material/core';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();

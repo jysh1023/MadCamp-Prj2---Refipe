@@ -1,12 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TextInput, Modal, TouchableOpacity, Alert} from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import React, { useState } from 'react';
+import {View, Text, StyleSheet, TextInput,TouchableOpacity} from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import axios from "axios";
 
- function IngredientDetail (){
+function IngredientDetail ({navigation}){
 
-  const navigation = useNavigation();
-  const route = useRoute();
+  const route = useRoute()
 
   const [itemName, setItemName] = useState(route.params.name);
   const [itemDate, setItemDate] = useState(route.params.date);
@@ -16,20 +15,26 @@ import axios from "axios";
 
 
   const handleEdit = async () => {
-    try{
-      console.log(route.params._id);
-      await axios.put(`http://172.10.5.72:80/ingredients/${route.params._id}`, {
-        name : itemName,
-        date : itemDate,
-        quantity : itemQuantity,
-        category : itemCategory
-      }).then(res => {console.log(res.data);})
-        .catch(err => console.error(err));
-          Alert("Edit item successful");
-    } catch (error) {
-      console.log(error)
+    if (itemName === route.params.name && itemDate === route.params.date &&
+      itemQuantity === route.params.quantity && itemCategory === route.params.category){
+      alert('수정 사항이 없습니다!');
+    } else {
+      try{
+        await axios.put(`http://172.10.5.72:80/ingredients/${route.params._id}`, {
+          name : itemName,
+          date : itemDate,
+          quantity : itemQuantity,
+          category : itemCategory
+        }).then(res => {console.log(res.data);})
+          .catch(err => console.error(err));
+            alert("수정 완료");
+            navigation.navigate('Home');
+
+      } catch (error) {
+        console.log(error)
+      }
     }
-  }
+  };
 
   const handleDelete = async() => {
     try{
@@ -37,7 +42,8 @@ import axios from "axios";
       await axios.delete(`http://172.10.5.72:80/ingredients/${route.params._id}`)
         .then(res => {console.log(res.data);})
         .catch(err => console.error(err));
-          Alert("Delete item successful");
+        alert("삭제 완료");
+        navigation.navigate('Home');
     } catch (error) {
       console.log(error)
     }
@@ -108,27 +114,18 @@ import axios from "axios";
         <TouchableOpacity
           style={styles.filledButton}
           activeOpacity={0.5}
-          onPress={() => {
-            handleDelete;
-            navigation.pop();
-          }}>
-            <Text style={{color: '#FFFFFF', fontSize: 15, fontWeight: 'bold'}}>다 먹음</Text>
-          </TouchableOpacity>
+          onPress={async() => await handleDelete()}>
+          <Text style={{color: '#FFFFFF', fontSize: 15, fontWeight: 'bold'}}>다 먹음</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={change === false? styles.outlinedButton : styles.filledButton}
           activeOpacity={0.5}
-          onPress={async() => {
-            if (change == false) Alert('수정 사항이 없습니다!')
-            else {
-              await handleEdit();
-              navigation.pop();
-            }
-          }}>
-            <Text style={change === false
-              ? {color: '#46B2B2', fontSize: 15, fontWeight: 'bold'}
-              : {color: '#FFFFFF', fontSize: 15, fontWeight: 'bold'}}>
-            수정</Text>
-          </TouchableOpacity>
+          onPress={async() => await handleEdit()} >
+          <Text style={change === false
+            ? {color: '#46B2B2', fontSize: 15, fontWeight: 'bold'}
+            : {color: '#FFFFFF', fontSize: 15, fontWeight: 'bold'}}>
+          수정</Text>
+        </TouchableOpacity>
       </View>
     </View>
 
