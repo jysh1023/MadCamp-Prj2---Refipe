@@ -9,6 +9,7 @@ import AddItem from './screens/AddItemScreen.js';
 import AddItemDetails from './screens/AddItemDetails';
 import SelectIngredient from './screens/SelectIngredient';
 import IngredientDetail from './screens/IngredientDetail';
+import { View, Image } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -16,9 +17,59 @@ const Stack = createNativeStackNavigator();
 function Home() {
   return (
     <Tab.Navigator screenOptions={{headerShown: false}}>
-      <Tab.Screen name="냉장고" component={Fridge} />
-      <Tab.Screen name="레시피북" component={Recipe} />
-      <Tab.Screen name="마이페이지" component={MyPage} />
+      <Tab.Screen
+        name="냉장고" component={Fridge} options={{
+          tabBarLabelStyle:{marginBottom:4, fontWeight:'bold', fontSize: 11},
+          tabBarStyle:{height:65},
+          tabBarActiveTintColor:'#46B2B2',
+          tabBarIcon:({focused}) => {
+            return (
+              <View>
+                <Image
+                  source={require('./assets/fridge_focused.png')}
+                  resizeMode="contain"
+                  style={{ width: 40 }}
+                />
+              </View>
+            );}
+          }}
+        />
+      <Tab.Screen
+        name="레시피북" component={Recipe} options={{
+          tabBarLabelStyle:{marginBottom:4, fontWeight:'bold', fontSize: 11},
+          tabBarStyle:{height:65},
+          tabBarActiveTintColor:'#46B2B2',
+          tabBarIcon:({focused}) => {
+            return (
+              <View>
+                <Image
+                  source={require('./assets/recipes_focused.png')}
+                  resizeMode="contain"
+                  style={{ width: 40 }}
+                />
+              </View>
+            );}
+          }}
+        />
+      <Tab.Screen
+        name="마이페이지" component={MyPage} options={{
+          tabBarLabelStyle:{marginBottom:4, fontWeight:'bold', fontSize: 11},
+          tabBarStyle:{height:65},
+          tabBarActiveTintColor:'#46B2B2',
+          tabBarIcon:({focused}) => {
+            return (
+              <View>
+                <Image
+                  source={require('./assets/mypage_focused.png')}
+                  resizeMode="contain"
+                  style={{ width: 40 }}
+                />
+              </View>
+            );}
+          }}
+        />
+      {/* <Tab.Screen name="레시피북" component={Recipe} />
+      <Tab.Screen name="마이페이지" component={MyPage} /> */}
     </Tab.Navigator>
   );
 }

@@ -4,7 +4,7 @@ import axios from "axios";
 import Fridge from './FridgeScreen';
 import KeyboardAwareScrollView from 'react-native-keyboard-aware-scroll-view';
 import { error } from 'console';
-import SelectDropdown from 'react-native-select-dropdown';
+import { SelectList } from 'react-native-dropdown-select-list'
 
 const AddItemDetails = ({navigation}) => {
   const [itemName, setItemName] = useState('');
@@ -16,6 +16,7 @@ const AddItemDetails = ({navigation}) => {
   const categories = ["과일", "채소", "쌀/잡곡", "견과/건과", "축산/계란", "수산물/건어물", "생수/음료", "커피/원두/차",
                       "과자/초콜릿/시리얼", "면/통조림/가공식품", "찬/간편식/대용식", "냉장/냉동/간편요리", "유제품/아이스크림",
                       "가루/조미료/오일", "장/소스/드레싱/식초"]
+
 
   // 식재료 추가하기 수정 부탁!
   const handleSubmit = async() => {
@@ -42,7 +43,6 @@ const AddItemDetails = ({navigation}) => {
   };
 
   return (
-
     <View style={styles.container}>
       <View style={{marginHorizontal: 24}}>
         <Text style={{fontSize: 15, color: '#333'}}>식재료</Text>
@@ -87,22 +87,6 @@ const AddItemDetails = ({navigation}) => {
 
       <View style={{marginHorizontal: 24}}>
         <Text style={{fontSize: 15, color: '#333'}}>분류</Text>
-        <SelectDropdown
-          data={categories}
-          onSelect={(selectedItem, index) => {
-            setItemCategory(selectedItem);
-            setFilled(true)
-          }}
-          defaultButtonText={'식품목을 고르세요'}
-          buttonTextStyle={styles.dropdown1BtnTxtStyle}
-          // renderDropdownIcon={isOpened => {
-          //   return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#444'} size={18} />;
-          // }}
-          dropdownIconPosition={'right'}
-          dropdownStyle={styles.dropdown1DropdownStyle}
-          rowStyle={styles.dropdown1RowStyle}
-          rowTextStyle={styles.dropdown1RowTxtStyle}
-        />
         {/* <TextInput
           style={styles.itemInput}
           value={itemCategory}
@@ -112,6 +96,15 @@ const AddItemDetails = ({navigation}) => {
           }}
           autoComplete="off"
         /> */}
+        <View style={{marginVertical: 15}}>
+          <SelectList
+            setSelected={(val) => setItemCategory(val)}
+            data={categories}
+            save="value"
+            search={false}
+          />
+        </View>
+
       </View>
 
       <View style={styles.buttonContainer}>
@@ -144,7 +137,7 @@ const styles = StyleSheet.create({
   itemInput: {
     borderBottomWidth: 0.5,
     height: 48,
-    borderBottomColor: '#8e93a1',
+    borderBottomColor: '#333',
     marginBottom: 30,
   },
   buttonContainer: {
@@ -162,7 +155,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   outlinedButton: {
-    height: 35,
+    height: 40,
     width: 170,
     justifyContent: 'center',
     alignItems:'center',

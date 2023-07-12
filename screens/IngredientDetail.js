@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {View, Text, StyleSheet, TextInput,TouchableOpacity} from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import axios from "axios";
+import { SelectList } from 'react-native-dropdown-select-list'
 
 function IngredientDetail ({navigation}){
 
@@ -13,6 +14,21 @@ function IngredientDetail ({navigation}){
   const [itemCategory, setItemCategory] = useState(route.params.category);
   const [change, setChange] = useState(false);
 
+  const categories = [{key: '1', value:"과일" } ,
+                      {key: '2', value:"채소" } ,
+                      {key: '3', value: "쌀/잡곡" } ,
+                      {key: '4', value: "견과/건과"} ,
+                      {key: '5', value: "축산/계란" } ,
+                      {key: '6', value: "수산물/건어물" } ,
+                      {key: '7', value: "생수/음료"} ,
+                      {key: '8', value: "커피/원두/차"} ,
+                      {key: '9', value: "과자/초콜릿/시리얼" } ,
+                      {key: '10', value: "면/통조림/가공식품"} ,
+                      {key: '11', value: "찬/간편식/대용식"} ,
+                      {key: '12', value: "냉장/냉동/간편요리"} ,
+                      {key: '13', value: "유제품/아이스크림"} ,
+                      {key: '14', value: "가루/조미료/오일"} ,
+                      {key: '15', value: "장/소스/드레싱/식초"} ]
 
   const handleEdit = async () => {
     if (itemName === route.params.name && itemDate === route.params.date &&
@@ -98,7 +114,7 @@ function IngredientDetail ({navigation}){
 
       <View style={{marginHorizontal: 24}}>
         <Text style={styles.titleText}>분류</Text>
-        <TextInput
+        {/* <TextInput
           style={styles.itemInput}
           defaultValue={itemCategory}
           onChangeText={text => {
@@ -107,7 +123,19 @@ function IngredientDetail ({navigation}){
             else setChange(false)
           }}
           autoComplete="off"
-        />
+        /> */}
+        <View style={{marginVertical: 15}}>
+          <SelectList
+            setSelected={(val) => {
+              setItemCategory(val.value);
+              setChange(true);
+            }}
+            data={categories}
+            save="value"
+            search={false}
+            // defaultOption={categories[categories.findIndex(itemCategory)]}
+          />
+        </View>
       </View>
 
       <View style={styles.buttonContainer}>
