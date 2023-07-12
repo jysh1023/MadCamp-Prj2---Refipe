@@ -16,7 +16,7 @@ const SelectIngredient = ({navigation}) =>  {
     if (selectedData.length <= 0) {
         alert('재료를 1개 이상으로 선택해주세요');
     } else {
-        const keyword = selectedData.join(", ");
+        const keyword = [selectedData.join(", ")];
 
         try {
             const res = await axios.post('http://172.10.5.72:80/keywords', { keywords: keyword });
