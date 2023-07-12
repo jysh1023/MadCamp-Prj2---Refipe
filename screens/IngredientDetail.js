@@ -30,6 +30,22 @@ function IngredientDetail ({navigation}){
                       {key: '14', value: "가루/조미료/오일"} ,
                       {key: '15', value: "장/소스/드레싱/식초"} ]
 
+  const formatToDate = (input) => {
+    const date = input.replace(/[^0-9]/g, '');
+
+    let formattedDate = '';
+    if (date.length > 0) {
+      formattedDate += date.substr(0, 4);
+    }
+    if (date.length > 4) {
+      formattedDate += '-' + date.substr(4, 2);
+    }
+    if (date.length > 6) {
+      formattedDate += '-' + date.substr(6, 2);
+    }
+    return formattedDate;
+  }
+
   const handleEdit = async () => {
     if (itemName === route.params.name && itemDate === route.params.date &&
       itemQuantity === route.params.quantity && itemCategory === route.params.category){
@@ -86,10 +102,11 @@ function IngredientDetail ({navigation}){
         <Text style={styles.titleText}>유통기한</Text>
         <TextInput
           style={styles.itemInput}
-          defaultValue={itemDate}
+          value={itemDate}
           onChangeText={text => {
-            setItemDate(text)
-            if (text != route.params.date) setChange(true)
+            const formattedDate = formatToDate(text);
+            setItemDate(formattedDate)
+            if (formattedDate != route.params.date) setChange(true)
             else setChange(false)
           }}
           autoComplete="off"
